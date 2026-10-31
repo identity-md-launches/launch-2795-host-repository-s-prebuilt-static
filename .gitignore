@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.design-ref/
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+*.log
+.DS_Store

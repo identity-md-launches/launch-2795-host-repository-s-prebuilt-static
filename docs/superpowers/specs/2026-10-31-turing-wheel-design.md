@@ -69,6 +69,7 @@ error UnknownProgram();
 error AlreadySqueeked();
 
 function SLICE() external view returns (uint64);                  // 512
+function LEAD() external view returns (uint64);                   // 768
 function MAX_SOURCE_BYTES() external view returns (uint256);      // 140
 function core() external view returns (address);
 function programCount() external view returns (uint256);
@@ -81,9 +82,11 @@ function submit(bytes calldata source) external returns (uint256 id);
 function squeek(uint256 id) external;
 ```
 
-`submit`: length 1..140, printable ASCII only (0x20..0x7e), then `startWork = max(queueEnd, core.state().cumulativeWork)`, `endWork = startWork + SLICE`, `queueEnd = endWork`. An author may hold one unfinished program at a time: revert `AlreadyQueued(end)` while their last program's `endWork` exceeds current work. `squeek` is one per wallet per program, and works on any existing program.
+`submit`: length 1..140, printable ASCII only (0x20..0x7e), then `startWork = max(queueEnd, core.state().cumulativeWork + LEAD)`, `endWork = startWork + SLICE`, `queueEnd = endWork`. An author may hold one unfinished program at a time: revert `AlreadyQueued(end)` while their last program's `endWork` exceeds current work. `squeek` is one per wallet per program, and works on any existing program.
 
 Settled on-chain work lags live telemetry by minutes and uses the same units. The chain is the schedule. Telemetry is the clock.
+
+`LEAD` exists because of that lag. Rounds are 600 seconds and settle about 36 seconds after they close, so settled work can trail live work by about 700 cycles at the observed peak, which is more than a whole slice. Without `LEAD`, a program queued while the hamster runs would own passes he has already spent. With it, a queued program genuinely owns its next 512 passes. The cost is that a program queued on an empty queue waits `LEAD` cycles, even while he sleeps and settled work equals live work. When the queue tail sits less than `LEAD` ahead of settled work, the new slice starts past the tail and house ROM fills the gap.
 
 ## Schedule (src/machine/schedule.ts)
 

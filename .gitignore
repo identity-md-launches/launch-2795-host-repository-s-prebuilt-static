@@ -1,5 +1,4 @@
 node_modules/
-dist/
 .env
 .design-ref/
 contracts/out/

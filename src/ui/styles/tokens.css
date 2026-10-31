@@ -1,0 +1,47 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0b0d;
+  --raised: #0f0f12;
+  --bench: #1a1a20;
+  --line: #1c1c24;
+  --line2: #26262f;
+  --white: #f2f2f4;
+  --gray: #6e6e7a;
+  --gray-lit: #82828f;
+  --dim: #3a3a46;
+
+  --gold: #f2c230;
+  --gold-1: #ffe28a;
+  --gold-2: #ffc048;
+  --rust: #8c3a10;
+  --blue: #5b7cfa;
+  --blue-1: #a8baff;
+  --blue-mid: #4460cf;
+  --blue-deep: #2f4499;
+  --pink: #f06bae;
+  --green: #35d07f;
+  --orange: #e8b04a;
+  --red: #f44a5e;
+  --active: #7fd4ff;
+
+  --r-panel: 10px;
+  --r-ctrl: 4px;
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 20px;
+  --s4: 24px;
+  --gutter: 12px;
+
+  --slam: 0.28s;
+  --slam-ease: cubic-bezier(0.3, 1.5, 0.5, 1);
+
+  --font-data: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-voice: 'Quicksand', system-ui, sans-serif;
+
+  --track-label: 0.12em;
+  --track-data: 0.02em;
+
+  --dots: radial-gradient(circle at center, #1c1c24 0.75px, transparent 1px);
+}

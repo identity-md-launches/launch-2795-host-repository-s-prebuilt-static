@@ -1,0 +1,160 @@
+.crank {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.crank .bar {
+  flex-wrap: nowrap;
+}
+
+.versus__best {
+  overflow: hidden;
+  color: var(--gray-lit);
+  font: 400 11px/1.2 var(--font-data);
+  letter-spacing: var(--track-data);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crank__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px var(--s2) var(--s2);
+  background-image: var(--dots);
+  background-size: 9px 9px;
+  border-radius: 0 0 var(--r-panel) var(--r-panel);
+}
+
+.dial {
+  position: relative;
+  flex: none;
+  width: min(100%, 288px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dial[data-held='true'] {
+  cursor: grabbing;
+}
+
+.dial:focus-visible {
+  outline-offset: 4px;
+}
+
+.dial__wheel {
+  position: absolute;
+  inset: 0;
+}
+
+.dial__hub {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dial__hz {
+  font: 200 58px/0.95 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+.dial[data-lit='true'] .dial__hz {
+  color: var(--gold-1);
+}
+
+.dial__label {
+  margin-top: 2px;
+  color: var(--gray-lit);
+  font: 400 11px/1 var(--font-data);
+  letter-spacing: var(--track-label);
+}
+
+.versus {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.versus__row {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) 54px;
+  align-items: center;
+  gap: 10px;
+  font: 400 11px/1 var(--font-data);
+  letter-spacing: var(--track-data);
+}
+
+.versus__name {
+  color: var(--gray-lit);
+}
+
+.versus__value {
+  font-weight: 400;
+  text-align: right;
+  color: var(--white);
+}
+
+.versus__meter {
+  --v: 0;
+  position: relative;
+  display: block;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #1b1b23 0 6px, transparent 6px 8px);
+}
+
+.versus__meter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, var(--meter, var(--gold-2)) 0 6px, transparent 6px 8px);
+  clip-path: inset(0 calc((1 - var(--v)) * 100%) 0 0);
+}
+
+.versus__meter[data-tone='blue'] {
+  --meter: var(--blue);
+}
+
+.verdict {
+  min-height: 1.4em;
+  max-width: 300px;
+  color: #c6c6cf;
+  font: 600 14px/1.4 var(--font-voice);
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (max-width: 1023px) {
+  .dial {
+    width: min(100%, 300px);
+  }
+  .versus__best {
+    max-width: 58%;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 860px) {
+  .dial {
+    width: min(100%, 236px);
+  }
+  .dial__hz {
+    font-size: 46px;
+  }
+  .verdict {
+    min-height: 1.4em;
+  }
+}
